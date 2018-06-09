@@ -5,13 +5,20 @@ var utils = require('./cli-utils');
 program = utils.configureCommander(program);
 
 program
+  .option('-f, --force', 'force new address by ignoring BIP44 max unused gap recommendation')
   .parse(process.argv);
 
 var args = program.args;
+
+var opts = {};
+if (program.force) { 
+    opts.ignoreMaxGap = program.force
+}
+
 utils.getClient(program, {
   mustExist: true
 }, function(client) {
-  client.createAddress({}, function(err, x) {
+  client.createAddress(opts, function(err, x) {
     utils.die(err);
     console.log('* New Address %s ', x.address);
   });
