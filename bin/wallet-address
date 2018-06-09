@@ -5,7 +5,7 @@ var utils = require('./cli-utils');
 program = utils.configureCommander(program);
 
 program
-  .option('-f, --force', 'force new address by ignoring BIP44 max unused gap recommendation')
+  .option('-F, --force', 'force new address by ignoring BIP44 max unused gap recommendation')
   .parse(process.argv);
 
 var args = program.args;
